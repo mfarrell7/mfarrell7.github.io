@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta information about the document. -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title of the Contact page -->
+    <title>Contact - Jason Torres Photography</title>
+    <!-- Link to the external CSS stylesheet for styling -->
+    <link href="css/styles.css" rel="stylesheet">
+    <!-- jQuery for interactivity -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <!-- Header section containing branding and navigation bar -->
+    <header>
+        <div class="branding">
+            <!-- Company logo -->
+            <img src="logo.png" alt="Jason Torres Photography Logo" class="logo">
+            <!-- Website name -->
+            <h1>Jason Torres Photography</h1>
+        </div>
+        <!-- Navigation bar with links to other pages on the website -->
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main content section of the Contact page -->
+    <main>
+        <section class="contact">
+            <h2>Contact Jason</h2>
+            <p>Have questions or want to book a session? Fill out the form below to get in touch!</p>
+            <form id="contactForm" class="contact-form">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Your Name" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Your Email" required>
+
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+
+                <button type="submit">Send Message</button>
+            </form>
+            <!-- Placeholder for AJAX success or error messages -->
+            <p id="responseMessage" style="margin-top: 20px;"></p>
+        </section>
+    </main>
+
+    <!-- Footer section with copyright information and validation links -->
+    <footer>
+        <p>&copy; 2024 Jason Torres Photography</p>
+        <a href="https://validator.w3.org/check?uri=referer" referrerpolicy="unsafe-url">Validate HTML</a>
+        <a href="https://jigsaw.w3.org/css-validator/check/referer" referrerpolicy="unsafe-url">Validate CSS</a>
+    </footer>
+
+    <!-- JavaScript for AJAX functionality -->
+    <script>
+        $(document).ready(function () {
+            // Handle form submission with AJAX
+            $('#contactForm').on('submit', function (e) {
+                e.preventDefault(); // Prevent the form from submitting the traditional way
+
+                // Collect form data
+                const formData = {
+                    name: $('#name').val(),
+                    email: $('#email').val(),
+                    message: $('#message').val(),
+                };
+
+                // AJAX POST request
+                $.ajax({
+                    url: 'https://jsonplaceholder.typicode.com/posts', // Mock API endpoint for testing
+                    method: 'POST',
+                    data: formData,
+                    success: function (response) {
+                        // Display success message
+                        $('#responseMessage').text('Thank you! Your message has been sent.').css('color', 'green');
+                        // Clear the form fields
+                        $('#contactForm')[0].reset();
+                    },
+                    error: function () {
+                        // Display error message
+                        $('#responseMessage').text('Sorry, there was an error sending your message. Please try again later.').css('color', 'red');
+                    },
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

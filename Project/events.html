@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta information about the document -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title of the Events page -->
+    <title>Events - Jason Torres Photography</title>
+    <!-- Link to the external CSS stylesheet for styling -->
+    <link href="css/styles.css" rel="stylesheet">
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCADmRO1nYXN_RumxXSg1HvagAVNXEUsl0" async defer></script>
+    <style>
+        #datepicker {
+            margin: 20px auto;
+            width: fit-content;
+        }
+
+        .events ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .events ul li {
+            margin-bottom: 20px;
+        }
+
+        .map {
+            width: 100%;
+            height: 300px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header section containing branding and navigation bar -->
+    <header>
+        <div class="branding">
+            <!-- Company logo -->
+            <img src="logo.png" alt="Jason Torres Photography Logo" class="logo">
+            <!-- Website name -->
+            <h1>Jason Torres Photography</h1>
+        </div>
+        <!-- Navigation bar with links to other pages on the website -->
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main content section of the Events page -->
+    <main>
+        <!-- Calendar Section -->
+        <section>
+            <h2>Select a Date</h2>
+            <div id="datepicker"></div>
+        </section>
+
+        <!-- Events section for listing upcoming events -->
+        <section class="events">
+            <h2>Upcoming Events</h2>
+            <ul>
+                <li>
+                    <h3>Wedding Photography Workshop</h3>
+                    <p>Date: October 10, 2024</p>
+                    <p>Location: New York City</p>
+                    <div class="map" id="map1" data-location="New York City"></div>
+                    <a href="https://maps.google.com">View on Map</a> | <a href="#">RSVP</a>
+                </li>
+                <li>
+                    <h3>Portrait Photography Masterclass</h3>
+                    <p>Date: November 15, 2024</p>
+                    <p>Location: Los Angeles</p>
+                    <div class="map" id="map2" data-location="Los Angeles"></div>
+                    <a href="https://maps.google.com">View on Map</a> | <a href="#">RSVP</a>
+                </li>
+                <li>
+                    <h3>Holiday Family Photo Sessions</h3>
+                    <p>Date: December 5-20, 2024</p>
+                    <p>Location: Chicago</p>
+                    <div class="map" id="map3" data-location="Chicago"></div>
+                    <a href="https://maps.google.com">View on Map</a> | <a href="#">RSVP</a>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- Footer section -->
+    <footer>
+        <p>&copy; 2024 Jason Torres Photography</p>
+        <a href="https://validator.w3.org/check?uri=referer" referrerpolicy="unsafe-url">Validate HTML</a>
+        <a href="https://jigsaw.w3.org/css-validator/check/referer" referrerpolicy="unsafe-url">Validate CSS</a>
+    </footer>
+
+    <!-- JavaScript for Google Maps Integration -->
+    <script>
+        function initMap() {
+            const maps = document.querySelectorAll('.map');
+
+            maps.forEach((mapElement) => {
+                const location = mapElement.getAttribute('data-location');
+                const map = new google.maps.Map(mapElement, {
+                    zoom: 12,
+                    center: { lat: 0, lng: 0 }, // Default center before geocoding
+                });
+
+                const geocoder = new google.maps.Geocoder();
+                geocoder.geocode({ address: location }, (results, status) => {
+                    if (status === 'OK') {
+                        map.setCenter(results[0].geometry.location);
+                        new google.maps.Marker({
+                            map: map,
+                            position: results[0].geometry.location,
+                        });
+                    } else {
+                        console.error(`Geocode was not successful for ${location}: ${status}`);
+                        mapElement.innerText = 'Unable to load map';
+                    }
+                });
+            });
+        }
+
+        // Load Google Maps after the page loads
+        window.addEventListener('load', initMap);
+    </script>
+</body>
+
+</html>
