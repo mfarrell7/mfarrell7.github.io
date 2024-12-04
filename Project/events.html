@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta information about the document -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title of the Events page -->
+    <title>Events - Jason Torres Photography</title>
+    <!-- Link to external CSS -->
+    <link href="css/styles.css" rel="stylesheet">
+    <!-- jQuery and jQuery-UI -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCADmRO1nYXN_RumxXSg1HvagAVNXEUsl0" async defer></script>
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            min-height: 100vh;
+        }
+
+        .branding {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Align logo and text correctly */
+            background-color: #333;
+            color: #fff;
+            gap: 15px; /* Add space between the logo and text */
+        }
+
+        .branding .logo {
+            height: 150px; /* Adjust height to ensure proper display */
+            width: 150px; /* Maintain aspect ratio */
+        }
+
+        .branding h1 {
+            margin: 0;
+            font-size: 2rem;
+            color: #fff;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Calendar Styling */
+        #datepicker {
+            margin: 20px auto;
+            width: fit-content;
+        }
+
+        /* Events Section Styling */
+        .events {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin: 20px auto;
+            overflow-x: auto;
+            padding: 20px;
+            gap: 20px;
+            max-width: 100%;
+        }
+
+        .event-item {
+            flex: 0 0 30%;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            padding: 15px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            min-width: 300px;
+        }
+
+        .event-item h3 {
+            margin-top: 0;
+            font-size: 18px;
+        }
+
+        .event-item p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        .map {
+            width: 100%;
+            height: 300px;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .event-item a {
+            text-decoration: none;
+            font-size: 14px;
+            color: #333;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .event-item a:hover {
+            text-decoration: underline;
+            color: #555;
+        }
+
+        @media (max-width: 768px) {
+            .events {
+                flex-wrap: nowrap;
+            }
+
+            .event-item {
+                flex: 0 0 80%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header section -->
+    <header>
+        <div class="branding">
+            <img src="logo.png" alt="Jason Torres Photography Logo" class="logo">
+            <h1>Jason Torres Photography</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main content section -->
+    <main>
+        <!-- Calendar Section -->
+        <section>
+            <h2>Select a Date</h2>
+            <div id="datepicker"></div>
+        </section>
+
+        <!-- Events Section -->
+        <h2 style="text-align: center; margin-top: 30px;">Upcoming Events</h2>
+        <section class="events">
+            <div class="event-item">
+                <h3>Wedding Photography Workshop</h3>
+                <p>Date: October 10, 2024</p>
+                <p>Location: New York City</p>
+                <div class="map" id="map1" data-location="New York City"></div>
+                <a href="https://maps.google.com">View on Map</a> | <a href="#">RSVP</a>
+            </div>
+            <div class="event-item">
+                <h3>Portrait Photography Masterclass</h3>
+                <p>Date: November 15, 2024</p>
+                <p>Location: Los Angeles</p>
+                <div class="map" id="map2" data-location="Los Angeles"></div>
+                <a href="https://maps.google.com">View on Map</a> | <a href="#">RSVP</a>
+            </div>
+            <div class="event-item">
+                <h3>Holiday Family Photo Sessions</h3>
+                <p>Date: December 5-20, 2024</p>
+                <p>Location: Chicago</p>
+                <div class="map" id="map3" data-location="Chicago"></div>
+                <a href="https://maps.google.com">View on Map</a> | <a href="#">RSVP</a>
+            </div>
+            <div class="event-item">
+                <h3>Doya Doya </h3>
+                <p>Date: January 14, 2025</p>
+                <p>Location: Osaka Japan</p>
+                <div class="map" id="map3" data-location="Osaka"></div>
+                <a href="https://maps.google.com">View on Map</a> | <a href="#">RSVP</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 Jason Torres Photography</p>
+        <a href="https://validator.w3.org/check?uri=referer">Validate HTML</a> |
+        <a href="https://jigsaw.w3.org/css-validator/check/referer">Validate CSS</a>
+    </footer>
+
+    <!-- JavaScript for Google Maps and Calendar -->
+    <script>
+        function initMap() {
+            const maps = document.querySelectorAll('.map');
+
+            maps.forEach((mapElement) => {
+                const location = mapElement.getAttribute('data-location');
+                const map = new google.maps.Map(mapElement, {
+                    zoom: 12,
+                    center: { lat: 0, lng: 0 },
+                });
+
+                const geocoder = new google.maps.Geocoder();
+                geocoder.geocode({ address: location }, (results, status) => {
+                    if (status === 'OK') {
+                        map.setCenter(results[0].geometry.location);
+                        new google.maps.Marker({
+                            map: map,
+                            position: results[0].geometry.location,
+                        });
+                    } else {
+                        console.error(`Geocode failed for ${location}: ${status}`);
+                        mapElement.innerText = 'Unable to load map';
+                    }
+                });
+            });
+        }
+
+        $(document).ready(function () {
+            $("#datepicker").datepicker();
+        });
+
+        window.addEventListener('load', initMap);
+    </script>
+</body>
+
+</html>
